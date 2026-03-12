@@ -55,7 +55,7 @@ export default function Contact() {
             Send Email
           </a>
           <a
-            href="https://linkedin.com/in/lutenreinhardt"
+            href="https://linkedin.com/in/luten-reinhardt"
             target="_blank"
             rel="noopener noreferrer"
             className="px-8 py-3.5 border border-white/10 hover:border-white/25 text-white text-sm font-medium rounded-lg transition-colors duration-200 inline-flex items-center justify-center gap-2"

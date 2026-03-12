@@ -90,7 +90,7 @@ export default function Hero() {
                 </svg>
               </a>
               <a
-                href="https://linkedin.com/in/lutenreinhardt"
+                href="https://linkedin.com/in/luten-reinhardt"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="text-muted hover:text-white transition-colors"

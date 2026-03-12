@@ -2,6 +2,9 @@
 
 import { motion, useInView } from "framer-motion";
 import { useRef } from "react";
+import dynamic from "next/dynamic";
+
+const XEmbed = dynamic(() => import("./XEmbed"), { ssr: false });
 
 interface ContentItem {
   type: string;
@@ -41,23 +44,12 @@ const contentAreas: ContentItem[] = [
   },
 ];
 
-// Placeholder for future X embeds
 const featuredPosts = [
-  {
-    handle: "@gigafactories",
-    placeholder: true,
-    text: "X post embed coming soon — viral content with millions of impressions",
-  },
-  {
-    handle: "@gigafactories",
-    placeholder: true,
-    text: "X post embed coming soon — behind the scenes at Giga Berlin",
-  },
-  {
-    handle: "@gigafactories",
-    placeholder: true,
-    text: "X post embed coming soon — employer branding content",
-  },
+  "https://x.com/Tesla_AI/status/1963308798765838809",
+  "https://x.com/gigafactories/status/1877015591162101942",
+  "https://x.com/gigafactories/status/1791033038601589015",
+  "https://x.com/gigafactories/status/1767905470415618392",
+  "https://x.com/Tesla/status/1639713037174161408",
 ];
 
 export default function Content() {
@@ -88,7 +80,7 @@ export default function Content() {
         </motion.div>
 
         {/* Content areas grid */}
-        <div className="grid sm:grid-cols-2 gap-4 mb-16">
+        <div className="grid sm:grid-cols-2 gap-4 mb-20">
           {contentAreas.map((item, i) => (
             <motion.div
               key={item.title}
@@ -116,33 +108,36 @@ export default function Content() {
           ))}
         </div>
 
-        {/* Featured X Posts - placeholders for embed */}
+        {/* Featured X Posts */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
         >
-          <h3 className="text-xl font-semibold mb-6 text-white">
-            Featured Posts
-          </h3>
-          <div className="grid sm:grid-cols-3 gap-4">
-            {featuredPosts.map((post, i) => (
-              <div
-                key={i}
-                className="p-5 rounded-xl bg-card-bg/50 border border-card-border border-dashed flex flex-col items-center justify-center text-center min-h-[200px]"
+          <div className="flex items-center gap-3 mb-8">
+            <svg className="w-5 h-5 text-white" fill="currentColor" viewBox="0 0 24 24">
+              <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
+            </svg>
+            <h3 className="text-xl font-bold text-white">
+              Featured Posts
+            </h3>
+          </div>
+
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
+            {featuredPosts.map((url, i) => (
+              <motion.div
+                key={url}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.4, delay: i * 0.08 }}
+                className="rounded-xl bg-card-bg/30 border border-card-border overflow-hidden"
               >
-                <span className="text-2xl mb-3 opacity-30">𝕏</span>
-                <p className="text-xs text-muted font-mono mb-2">
-                  {post.handle}
-                </p>
-                <p className="text-xs text-muted/50">{post.text}</p>
-              </div>
+                <XEmbed tweetUrl={url} />
+              </motion.div>
             ))}
           </div>
-          <p className="text-xs text-muted/50 text-center mt-4">
-            X post embeds will be added once specific post URLs are provided
-          </p>
         </motion.div>
       </div>
     </section>
