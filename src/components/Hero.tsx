@@ -105,21 +105,27 @@ export default function Hero() {
 
           {/* Image */}
           <motion.div
-            initial={{ opacity: 0, scale: 0.9 }}
+            initial={{ opacity: 0, scale: 0.95 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.8, delay: 0.2 }}
             className="order-1 md:order-2 flex justify-center"
           >
-            <div className="relative">
-              <div className="absolute -inset-1 bg-gradient-to-br from-accent/20 to-transparent rounded-2xl blur-xl" />
+            <div className="relative group">
+              {/* Glow behind image */}
+              <div className="absolute -inset-3 bg-gradient-to-br from-accent/15 via-accent/5 to-transparent rounded-3xl blur-2xl opacity-60 group-hover:opacity-100 transition-opacity duration-700" />
+              {/* Accent ring */}
+              <div className="absolute -inset-[2px] bg-gradient-to-br from-accent/30 via-transparent to-accent/10 rounded-2xl" />
               <Image
                 src="/profile.jpg"
                 alt="Luten Reinhardt"
-                width={320}
-                height={320}
-                className="relative rounded-2xl object-cover w-64 h-64 sm:w-72 sm:h-72 lg:w-80 lg:h-80 grayscale hover:grayscale-0 transition-all duration-700"
+                width={420}
+                height={420}
+                className="relative rounded-2xl object-cover w-72 h-72 sm:w-80 sm:h-80 lg:w-[380px] lg:h-[380px]"
+                style={{ objectPosition: "center top" }}
                 priority
               />
+              {/* Subtle bottom fade */}
+              <div className="absolute inset-0 rounded-2xl bg-gradient-to-t from-[#0a0a0a]/30 via-transparent to-transparent pointer-events-none" />
             </div>
           </motion.div>
         </div>
