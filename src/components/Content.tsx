@@ -124,15 +124,15 @@ export default function Content() {
             </h3>
           </div>
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
+          <div className="columns-1 sm:columns-2 lg:columns-3 gap-2 space-y-2">
             {featuredPosts.map((url, i) => (
               <motion.div
                 key={url}
-                initial={{ opacity: 0, y: 20 }}
+                initial={{ opacity: 0, y: 15 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
-                transition={{ duration: 0.4, delay: i * 0.08 }}
-                className="rounded-xl bg-card-bg/30 border border-card-border overflow-hidden"
+                transition={{ duration: 0.4, delay: i * 0.06 }}
+                className="break-inside-avoid"
               >
                 <XEmbed tweetUrl={url} />
               </motion.div>

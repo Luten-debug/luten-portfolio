@@ -4,6 +4,77 @@ import { motion, useInView } from "framer-motion";
 import { useRef } from "react";
 import Image from "next/image";
 
+/* ── Inline Logo Components (logo + name) ── */
+
+function TeslaLogo() {
+  return (
+    <div className="flex items-center gap-2.5">
+      <Image
+        src="/logos/tesla.png"
+        alt="Tesla"
+        width={80}
+        height={16}
+        className="object-contain h-8 w-auto"
+      />
+      <span className="text-[15px] font-semibold text-white">Gigafactory Berlin</span>
+    </div>
+  );
+}
+
+function ZebraLogo() {
+  return (
+    <span className="text-[15px] font-bold tracking-tight">
+      <span className="text-white">zebra</span>
+      <span className="text-white/50"> | group</span>
+    </span>
+  );
+}
+
+function AudiLogo() {
+  return (
+    <div className="flex items-center gap-2.5">
+      <Image
+        src="/logos/audi.svg"
+        alt="Audi"
+        width={80}
+        height={20}
+        className="object-contain h-5 w-auto brightness-0 invert"
+      />
+      <span className="text-[15px] font-semibold tracking-wide text-white">Audi Zentrum Rostock</span>
+    </div>
+  );
+}
+
+function NordwasserLogo() {
+  return (
+    <div className="flex items-center gap-2.5">
+      <Image
+        src="/logos/nordwasser.svg"
+        alt="Nordwasser"
+        width={80}
+        height={16}
+        className="object-contain h-4 w-auto brightness-0 invert"
+      />
+      <span className="text-[15px] font-semibold text-white">Nordwasser</span>
+    </div>
+  );
+}
+
+function LidlLogo() {
+  return (
+    <div className="flex items-center gap-2.5">
+      <Image
+        src="/logos/lidl.svg"
+        alt="Lidl"
+        width={40}
+        height={40}
+        className="object-contain h-5 w-auto"
+      />
+      <span className="text-[15px] font-semibold text-white">Deutschland</span>
+    </div>
+  );
+}
+
 /* ── Data ── */
 
 interface SubRole {
@@ -18,10 +89,7 @@ interface CompanyBlock {
   company: string;
   location: string;
   totalPeriod: string;
-  logo: string;
-  logoWidth: number;
-  logoHeight: number;
-  logoBg?: string;
+  logo: React.ReactNode;
   accentColor: string;
   roles: SubRole[];
 }
@@ -31,9 +99,7 @@ const companies: CompanyBlock[] = [
     company: "Tesla",
     location: "Gigafactory Berlin-Brandenburg",
     totalPeriod: "Feb 2023 – Present · 3+ Years",
-    logo: "/logos/tesla.png",
-    logoWidth: 80,
-    logoHeight: 16,
+    logo: <TeslaLogo />,
     accentColor: "#e82127",
     roles: [
       {
@@ -76,13 +142,10 @@ const companies: CompanyBlock[] = [
     ],
   },
   {
-    company: "zebra | group GmbH",
+    company: "zebra | group",
     location: "Chemnitz",
     totalPeriod: "Jan 2022 – Jan 2023 · 1 Year",
-    logo: "/logos/zebra.jpg",
-    logoWidth: 80,
-    logoHeight: 30,
-    logoBg: "white",
+    logo: <ZebraLogo />,
     accentColor: "#a855f7",
     roles: [
       {
@@ -98,9 +161,7 @@ const companies: CompanyBlock[] = [
     company: "Audi Zentrum Rostock",
     location: "Rostock",
     totalPeriod: "Aug 2020 – Sep 2021 · 1 Year",
-    logo: "/logos/audi.svg",
-    logoWidth: 70,
-    logoHeight: 24,
+    logo: <AudiLogo />,
     accentColor: "#bb0000",
     roles: [
       {
@@ -116,10 +177,7 @@ const companies: CompanyBlock[] = [
     company: "Nordwasser GmbH",
     location: "Rostock",
     totalPeriod: "Jul 2019 – Sep 2021 · 2 Years",
-    logo: "/logos/nordwasser.jpg",
-    logoWidth: 90,
-    logoHeight: 30,
-    logoBg: "white",
+    logo: <NordwasserLogo />,
     accentColor: "#22c55e",
     roles: [
       {
@@ -135,9 +193,7 @@ const companies: CompanyBlock[] = [
     company: "Lidl Deutschland",
     location: "Neckarsulm",
     totalPeriod: "Jan 2020 – Apr 2020 · 4 Months",
-    logo: "/logos/lidl.png",
-    logoWidth: 40,
-    logoHeight: 40,
+    logo: <LidlLogo />,
     accentColor: "#0053a0",
     roles: [
       {
@@ -156,11 +212,13 @@ const education = [
     period: "2021 – 2024",
     degree: "M.Sc. Media & Instructional Psychology",
     school: "TU Chemnitz",
+    logo: "/logos/tu-chemnitz.svg",
   },
   {
     period: "2018 – 2021",
     degree: "B.A. Psychology",
     school: "FH des Mittelstandes (FHM)",
+    logo: "/logos/fhm.svg",
   },
 ];
 
@@ -217,26 +275,8 @@ function CompanyCard({ block, index }: { block: CompanyBlock; index: number }) {
                 : "rgba(255,255,255,0.04)",
             }}
           >
-            <div className="flex items-center gap-4">
-              <div
-                className="flex items-center justify-center rounded-md overflow-hidden shrink-0"
-                style={{
-                  background: block.logoBg || "transparent",
-                  padding: block.logoBg ? "4px 8px" : "0",
-                }}
-              >
-                <Image
-                  src={block.logo}
-                  alt={block.company}
-                  width={block.logoWidth}
-                  height={block.logoHeight}
-                  className="object-contain"
-                  style={{
-                    maxHeight: `${block.logoHeight}px`,
-                    filter: !block.logoBg ? "brightness(0) invert(1)" : "none",
-                  }}
-                />
-              </div>
+            <div className="flex items-center gap-3">
+              {block.logo}
               {isTesla && (
                 <span className="text-[10px] px-2.5 py-0.5 rounded-full bg-[#e82127]/10 text-[#e82127] border border-[#e82127]/20 font-semibold tracking-wide">
                   CURRENT
@@ -291,18 +331,8 @@ function CompanyCard({ block, index }: { block: CompanyBlock; index: number }) {
 
           {isTesla && (
             <div className="px-6 py-3 bg-[#e82127]/[0.03] border-t border-[#e82127]/10 flex items-center gap-2">
-              <svg
-                className="w-3.5 h-3.5 text-[#e82127]/70"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M5 10l7-7m0 0l7 7m-7-7v18"
-                />
+              <svg className="w-3.5 h-3.5 text-[#e82127]/70" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 10l7-7m0 0l7 7m-7-7v18" />
               </svg>
               <p className="text-xs text-[#e82127]/70 font-medium">
                 5 roles in 3 years — Intern → HR Business Partner
@@ -365,10 +395,19 @@ export default function Timeline() {
           </h3>
           <div className="grid sm:grid-cols-2 gap-4">
             {education.map((edu) => (
-              <div key={edu.degree} className="p-5 rounded-xl bg-card-bg/50 border border-card-border">
-                <p className="text-xs text-muted font-mono mb-2">{edu.period}</p>
-                <p className="text-sm font-semibold text-white">{edu.degree}</p>
-                <p className="text-sm text-muted">{edu.school}</p>
+              <div key={edu.degree} className="p-5 rounded-xl bg-card-bg/50 border border-card-border flex gap-4 items-start">
+                <Image
+                  src={edu.logo}
+                  alt={edu.school}
+                  width={32}
+                  height={32}
+                  className="object-contain w-8 h-8 brightness-0 invert shrink-0 mt-0.5"
+                />
+                <div>
+                  <p className="text-xs text-muted font-mono mb-1">{edu.period}</p>
+                  <p className="text-sm font-semibold text-white">{edu.degree}</p>
+                  <p className="text-sm text-muted">{edu.school}</p>
+                </div>
               </div>
             ))}
           </div>
