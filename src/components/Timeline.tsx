@@ -104,10 +104,10 @@ const companies: CompanyBlock[] = [
     roles: [
       {
         period: "Jan 2026 – Present",
-        role: "HR Business Partner",
+        role: "Sr. HR Business Partner",
         description:
-          "Owning Talent, Performance Management & Employee Relations for a high-output manufacturing org. Direct impact on retention, leadership development and workforce strategy at one of the most fast-paced factories in Europe.",
-        tags: ["Talent Management", "Employee Relations", "Performance"],
+          "Strategic people partner for ~400 employees across multiple departments. Single point of contact for all HR topics — from workforce planning and performance management to employee relations and organizational development. Driving retention, leadership development and change management at one of Europe's highest-output manufacturing sites.",
+        tags: ["Strategic HR", "Workforce Planning", "Performance Management", "Change Management", "Employee Relations", "Org Development"],
         highlight: true,
       },
       {
@@ -335,7 +335,7 @@ function CompanyCard({ block, index }: { block: CompanyBlock; index: number }) {
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 10l7-7m0 0l7 7m-7-7v18" />
               </svg>
               <p className="text-xs text-[#e82127]/70 font-medium">
-                5 roles in 3 years — Intern → HR Business Partner
+                5 roles in 3 years — Intern → Sr. HR Business Partner
               </p>
             </div>
           )}

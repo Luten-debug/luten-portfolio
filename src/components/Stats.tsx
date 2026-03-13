@@ -11,9 +11,8 @@ interface Stat {
 
 const stats: Stat[] = [
   { value: 100, suffix: "M+", label: "Impressions on X" },
-  { value: 3, suffix: "+", label: "Years at Tesla" },
-  { value: 4, suffix: "", label: "X Accounts Managed" },
-  { value: 50, suffix: "k+", label: "Content Pieces Created" },
+  { value: 400, suffix: "+", label: "Employees Supported" },
+  { value: 130, suffix: "+", label: "Nations Working Together" },
 ];
 
 function AnimatedNumber({ value, suffix }: { value: number; suffix: string }) {
@@ -75,7 +74,7 @@ export default function Stats() {
           </h2>
         </motion.div>
 
-        <div className="grid grid-cols-2 lg:grid-cols-4 gap-6">
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-6">
           {stats.map((stat, i) => (
             <motion.div
               key={stat.label}

@@ -76,7 +76,7 @@ export default function Hero() {
             transition={{ duration: 0.7, delay: 1.0, ease: "easeOut" }}
             className="text-muted text-lg max-w-lg leading-relaxed mb-6"
           >
-            HR Business Partner & Employer Branding Content Lead at{" "}
+            Sr. HR Business Partner & Employer Branding Content Lead at{" "}
             <span className="text-white font-medium">
               Tesla Gigafactory Berlin
             </span>
